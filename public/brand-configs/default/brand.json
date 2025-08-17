@@ -1,0 +1,126 @@
+{
+  "metadata": {
+    "id": "default",
+    "name": "Sampa League - Default",
+    "description": "Tema por defecto para gestión de torneos",
+    "category": "sport",
+    "version": "1.0.0",
+    "author": "Sistema",
+    "created": "2024-01-15"
+  },
+  
+  "app": {
+    "name": "Sampa League",
+    "slogan": "",
+    "description": "Progressive Web App para gestión y visualización de torneos de fútbol"
+  },
+  
+  "colors": {
+    "primary": {
+      "hsl": "145 54% 24%",
+      "hex": "#195d2c"
+    },
+    "secondary": {
+      "hsl": "147 84% 17%",
+      "hex": "#085426"
+    },
+    "accent": {
+      "hsl": "54 100% 50%",
+      "hex": "#ffeb00"
+    },
+    "success": {
+      "hsl": "145 54% 24%",
+      "hex": "#195d2c"
+    },
+    "warning": {
+      "hsl": "54 100% 50%",
+      "hex": "#ffeb00"
+    },
+    "error": {
+      "hsl": "0 84% 60%",
+      "hex": "#ef4444"
+    },
+    "background": {
+      "hsl": "0 0% 100%",
+      "hex": "#ffffff"
+    },
+    "foreground": {
+      "hsl": "222.2 84% 4.9%",
+      "hex": "#0f172a"
+    },
+    "card": {
+      "hsl": "0 0% 100%",
+      "hex": "#ffffff"
+    },
+    "cardForeground": {
+      "hsl": "222.2 84% 4.9%",
+      "hex": "#0f172a"
+    },
+    "muted": {
+      "hsl": "210 40% 96%",
+      "hex": "#f1f5f9"
+    },
+    "mutedForeground": {
+      "hsl": "215.4 16.3% 46.9%",
+      "hex": "#64748b"
+    },
+    "border": {
+      "hsl": "214.3 31.8% 91.4%",
+      "hex": "#e2e8f0"
+    },
+    "sport": {
+      "trophy": {
+        "hsl": "45 93% 47%",
+        "hex": "#eab308"
+      },
+      "victory": {
+        "hsl": "142 76% 36%",
+        "hex": "#16a34a"
+      },
+      "defeat": {
+        "hsl": "0 84% 60%",
+        "hex": "#ef4444"
+      },
+      "draw": {
+        "hsl": "43 74% 66%",
+        "hex": "#a3a3a3"
+      }
+    },
+    "extended": {
+      "greenLight": {
+        "hsl": "145 40% 60%",
+        "hex": "#66b68a"
+      },
+      "greenLighter": {
+        "hsl": "145 40% 80%",
+        "hex": "#b8e0c9"
+      },
+      "yellowLight": {
+        "hsl": "54 100% 70%",
+        "hex": "#fff266"
+      },
+      "yellowLighter": {
+        "hsl": "54 100% 85%",
+        "hex": "#fff9b3"
+      }
+    }
+  },
+  
+  "assets": {
+    "logo": "./logo.png",
+    "logoSmall": "./logo.png",
+    "favicon": "./favicon.ico",
+    "preview": "./preview.png"
+  },
+  
+  "typography": {
+    "fontFamily": "Inter, system-ui, sans-serif",
+    "headingFont": "Inter, system-ui, sans-serif"
+  },
+  
+  "tournament": {
+    "defaultFormat": "league",
+    "showBranding": true,
+    "allowCustomization": true
+  }
+}
