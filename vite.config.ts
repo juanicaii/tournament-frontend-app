@@ -10,9 +10,9 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
       manifest: {
-        name: 'Sampa League - Gestión de Torneos',
+        name: 'Sampa League',
         short_name: 'Sampa League',
-        description: 'Progressive Web App para gestión y visualización de torneos de fútbol',
+        description: 'Liga de fútbol de Sampa',
         theme_color: '#195d2c',
         background_color: '#000000',
         display: 'standalone',
@@ -21,17 +21,17 @@ export default defineConfig({
         start_url: '/',
         icons: [
           {
-            src: 'icons/icon-192x192.png',
+            src: 'public/brand-configs/default/logo.jpeg',
             sizes: '192x192',
             type: 'image/png'
           },
           {
-            src: 'icons/icon-512x512.png',
+            src: 'public/brand-configs/default/logo.jpeg',
             sizes: '512x512',
             type: 'image/png'
           },
           {
-            src: 'icons/icon-512x512.png',
+            src: 'public/brand-configs/default/logo.jpeg',
             sizes: '512x512',
             type: 'image/png',
             purpose: 'any maskable'
