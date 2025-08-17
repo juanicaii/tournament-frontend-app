@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Calendar, MapPin, Users, Clock } from 'lucide-react'
+import { Calendar, Users, Clock } from 'lucide-react'
 import { Tournament } from '../types/tournament'
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
 import { getTournamentStatusColor, formatShortDate } from '../lib/utils'

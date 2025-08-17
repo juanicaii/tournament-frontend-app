@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { Search, Filter, Grid, List, RefreshCw } from 'lucide-react'
-import { Tournament, SearchFilters, SortOptions } from '../types/tournament'
+import { Search, RefreshCw } from 'lucide-react'
+import {  SearchFilters, SortOptions } from '../types/tournament'
 import { useTournamentList } from '../hooks/useTournamentData'
 import TournamentCard from '../components/TournamentCard'
 import { Button } from '../components/ui/button'
@@ -10,7 +10,6 @@ import { useBrandConfig } from '../hooks/useBrandConfig'
 export default function HomePage() {
   const { config } = useBrandConfig()
   const { tournaments, loading, error, refresh } = useTournamentList()
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
   const [filters, setFilters] = useState<SearchFilters>({})
   const [sortBy, setSortBy] = useState<SortOptions>({
     field: 'name',
@@ -178,9 +177,7 @@ export default function HomePage() {
         </div>
       ) : filteredTournaments.length > 0 ? (
         <div className={`grid gap-6 ${
-          viewMode === 'grid' 
-            ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4' 
-            : 'grid-cols-1'
+          'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4' 
         }`}>
           {filteredTournaments.map((tournament) => (
             <TournamentCard key={tournament.id} tournament={tournament} />

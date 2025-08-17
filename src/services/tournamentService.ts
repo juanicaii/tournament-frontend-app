@@ -135,7 +135,7 @@ class TournamentService {
   }
 
   mapApiTopScorersToPlayerStats(topScorers: ApiTopScorersResponse): PlayerStats[] {
-    return topScorers.topScorers.map((scorer, index) => ({
+    return topScorers.topScorers.map((scorer, _index) => ({
       playerId: scorer.userId,
       tournamentId: topScorers.tournamentId.toString(),
       goals: scorer.goals,
