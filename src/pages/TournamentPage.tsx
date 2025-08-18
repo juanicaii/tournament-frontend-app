@@ -111,17 +111,7 @@ export default function TournamentPage() {
 
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            {/* Country */}
-            <div className="flex items-center gap-2">
-              <MapPin className="w-5 h-5 text-muted-foreground" />
-              <div>
-                <p className="text-sm text-muted-foreground">País</p>
-                <p className="font-medium">{tournament.country}</p>
-                {tournament.region && (
-                  <p className="text-xs text-muted-foreground">{tournament.region}</p>
-                )}
-              </div>
-            </div>
+            
 
             {/* Teams */}
             <div className="flex items-center gap-2">

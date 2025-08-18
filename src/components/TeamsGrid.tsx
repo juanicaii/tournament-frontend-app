@@ -86,9 +86,7 @@ export default function TeamsGrid({ teams }: TeamsGridProps) {
                   <CardTitle className="text-lg font-bold line-clamp-2">
                     {team.name}
                   </CardTitle>
-                  <p className="text-sm text-muted-foreground font-medium">
-                    {team.shortName}
-                  </p>
+                 
                 </div>
               </div>
             </CardHeader>
@@ -120,24 +118,8 @@ export default function TeamsGrid({ teams }: TeamsGridProps) {
                   </div>
                 )}
 
-                {/* Colors */}
-                <div className="flex items-center space-x-2">
-                  <div className="flex items-center space-x-1">
-                    <span className="text-sm text-muted-foreground">Colores:</span>
-                    <div className="flex space-x-1">
-                      <div
-                        className="w-4 h-4 rounded-full border border-border"
-                        style={{ backgroundColor: team.colors.primary }}
-                        title="Color primario"
-                      />
-                      <div
-                        className="w-4 h-4 rounded-full border border-border"
-                        style={{ backgroundColor: team.colors.secondary }}
-                        title="Color secundario"
-                      />
-                    </div>
-                  </div>
-                </div>
+                
+         
 
                 {/* Action Buttons */}
                 <div className="flex space-x-2 pt-2">

@@ -85,7 +85,6 @@ export function useTournamentList() {
 
 export function useTournament(id: string) {
   const { tournamentData, loading, error, refreshTournamentData } = useTournamentData(id)
-  console.log(tournamentData)
   
   return {
     tournamentData,

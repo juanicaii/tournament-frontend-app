@@ -76,7 +76,7 @@ export interface ApiTopScorer {
   name: string
   teamName: string
   teamLogo?: string
-  goals: number
+  goals: string
 }
 
 export interface ApiTopScorersResponse {

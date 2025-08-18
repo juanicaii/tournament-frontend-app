@@ -39,6 +39,7 @@ export default function PlayersTable({ playerStats, players, teams }: PlayersTab
     })
 
   const topScorer = filteredAndSortedStats[0]
+  console.log(topScorer)
   const getPositionName = (position: Player['position']) => {
     switch (position) {
       case 'GK': return 'Portero'
@@ -74,14 +75,7 @@ export default function PlayersTable({ playerStats, players, teams }: PlayersTab
                     <Target className="w-4 h-4" />
                     <span>{topScorer.goals} goles</span>
                   </span>
-                  <span className="flex items-center space-x-1">
-                    <Users className="w-4 h-4" />
-                    <span>{topScorer.assists} asistencias</span>
-                  </span>
-                  <span className="flex items-center space-x-1">
-                    <Clock className="w-4 h-4" />
-                    <span>{topScorer.averageGoalsPerGame.toFixed(2)} promedio</span>
-                  </span>
+                
                 </div>
               </div>
             </div>
@@ -104,8 +98,6 @@ export default function PlayersTable({ playerStats, players, teams }: PlayersTab
               >
                 <option value="goals">Más goles</option>
                 <option value="assists">Más asistencias</option>
-                <option value="averageGoalsPerGame">Mejor promedio</option>
-                <option value="matches">Más partidos</option>
               </select>
 
               {/* Team Filter */}
@@ -133,7 +125,6 @@ export default function PlayersTable({ playerStats, players, teams }: PlayersTab
                   <th className="w-12">#</th>
                   <th className="min-w-[200px]">Jugador</th>
                   <th className="w-20">Equipo</th>
-                  <th className="w-16 mobile-hide">Pos.</th>
                   <th className="w-16">
                     <button 
                       onClick={() => setSortBy('goals')}
@@ -142,31 +133,9 @@ export default function PlayersTable({ playerStats, players, teams }: PlayersTab
                       Goles
                     </button>
                   </th>
-                  <th className="w-16 mobile-hide">
-                    <button 
-                      onClick={() => setSortBy('assists')}
-                      className={cn('hover:text-foreground', sortBy === 'assists' && 'text-brand-primary font-medium')}
-                    >
-                      Asist.
-                    </button>
-                  </th>
-                  <th className="w-16 mobile-hide">
-                    <button 
-                      onClick={() => setSortBy('matches')}
-                      className={cn('hover:text-foreground', sortBy === 'matches' && 'text-brand-primary font-medium')}
-                    >
-                      PJ
-                    </button>
-                  </th>
-                  <th className="w-20">
-                    <button 
-                      onClick={() => setSortBy('averageGoalsPerGame')}
-                      className={cn('hover:text-foreground', sortBy === 'averageGoalsPerGame' && 'text-brand-primary font-medium')}
-                    >
-                      Prom.
-                    </button>
-                  </th>
-                  <th className="w-16 mobile-hide">Min.</th>
+                  
+                 
+                 
                 </tr>
               </thead>
               <tbody>
@@ -217,20 +186,12 @@ export default function PlayersTable({ playerStats, players, teams }: PlayersTab
                           <span className="text-sm font-medium">{team?.name}</span>
                         </div>
                       </td>
-                      <td className="text-center text-sm mobile-hide">
-                        {getPositionName(player?.position || 'FWD')}
-                      </td>
+                      
+                      
                       <td className="text-center font-bold text-brand-victory">
                         {stat.goals}
                       </td>
-                      <td className="text-center mobile-hide">{stat.assists}</td>
-                      <td className="text-center mobile-hide">{stat.matches}</td>
-                      <td className="text-center font-medium">
-                        {stat.averageGoalsPerGame.toFixed(2)}
-                      </td>
-                      <td className="text-center text-sm text-muted-foreground mobile-hide">
-                        {stat.minutesPlayed.toLocaleString()}'
-                      </td>
+                     
                     </tr>
                   )
                 })}
@@ -238,12 +199,7 @@ export default function PlayersTable({ playerStats, players, teams }: PlayersTab
             </table>
           </div>
 
-          {/* Stats Summary */}
-          <div className="p-4 border-t bg-muted/20">
-            <p className="text-xs text-muted-foreground">
-              PJ: Partidos Jugados, Asist.: Asistencias, Prom.: Promedio de goles por partido, Min.: Minutos jugados
-            </p>
-          </div>
+          
         </CardContent>
       </Card>
     </div>

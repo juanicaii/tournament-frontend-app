@@ -21,11 +21,11 @@ export default function Header() {
           )}
           <div className="flex flex-col">
             <span className="font-bold text-lg text-primary">
-              {config?.app.name || 'Sampa League'}
+              {config?.app.name || 'Cargando...'}
             </span>
             {config?.app.slogan && (
               <span className="text-xs text-muted-foreground hidden sm:block">
-                {config.app.slogan}
+                {config.app.slogan || 'Cargando...'}
               </span>
             )}
           </div>

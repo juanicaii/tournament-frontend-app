@@ -42,17 +42,57 @@ export interface Player {
   photo?: string
 }
 
-export interface Match {
+export interface Goal {
   id: string
-  tournamentId: string
-  homeTeamId: string
-  awayTeamId: string
-  homeScore?: number
-  awayScore?: number
+  playerId: string
+  playerName: string
+  teamId: string
+  minute: number
+  type: 'regular' | 'penalty' | 'own_goal' | 'free_kick'
+  assistPlayerId?: string
+  assistPlayerName?: string
+}
+
+export interface MatchResultData {
+  id: number
+  matchId: number
+  homeScore: number
+  awayScore: number
+  homeScoreHalftime: number
+  awayScoreHalftime: number
+  homeScoreExtraTime?: number | null
+  awayScoreExtraTime?: number | null
+  homeScorePenalties?: number | null
+  awayScorePenalties?: number | null
+  winnerTeamId?: number | null
+  isOfficial: boolean
+  recordedBy: string
+  recordedAt: string
+  updatedAt: string
+  goals?: Goal[]
+}
+
+export interface Match {
+  id: string | number
+  tournamentId: string | number
+  homeTeamId: string | number
+  awayTeamId: string | number
+  homeScore?: number // Legacy support
+  awayScore?: number // Legacy support
   date: Date
-  matchday: number
-  status: 'scheduled' | 'live' | 'finished'
+  scheduledAt?: string | null
+  kickoffAt?: string
+  matchday?: number // Legacy support
+  round?: number
+  phase?: string
+  playoffRound?: number
+  status: 'scheduled' | 'live' | 'finished' | 'completed' | 'pending'
   venue?: string
+  venueId?: number | null
+  homeTeamName?: string
+  awayTeamName?: string
+  result?: MatchResultData
+  goals?: Goal[]
 }
 
 export interface Standing {

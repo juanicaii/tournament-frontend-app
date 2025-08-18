@@ -130,7 +130,8 @@ class TournamentService {
       date: new Date(apiMatch.scheduledAt),
       matchday: apiMatch.round,
       status: this.mapMatchStatus(apiMatch.status),
-      venue: apiMatch.venue?.name
+      venue: apiMatch.venue?.name,
+      phase: apiMatch.phase
     }
   }
 
@@ -138,13 +139,13 @@ class TournamentService {
     return topScorers.topScorers.map((scorer, _index) => ({
       playerId: scorer.userId,
       tournamentId: topScorers.tournamentId.toString(),
-      goals: scorer.goals,
+      goals: parseInt(scorer.goals),
       assists: 0,
       matches: 0,
       minutesPlayed: 0,
       yellowCards: 0,
       redCards: 0,
-      averageGoalsPerGame: scorer.goals
+      averageGoalsPerGame: parseInt(scorer.goals)
     }))
   }
 
