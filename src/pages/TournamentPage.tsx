@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom'
-import { ArrowLeft, Calendar, MapPin, Users, RefreshCw } from 'lucide-react'
+import { ArrowLeft, Calendar, Users, RefreshCw } from 'lucide-react'
 import { useTournament } from '../hooks/useTournamentData'
 import { Button } from '../components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'

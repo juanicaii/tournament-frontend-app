@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Trophy, Target, Clock, Users } from 'lucide-react'
+import { Trophy, Target} from 'lucide-react'
 import { PlayerStats, Player, Team } from '../types/tournament'
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
 import { cn } from '../lib/utils'
