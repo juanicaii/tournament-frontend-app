@@ -89,6 +89,44 @@ export interface ApiVenue {
   name: string
 }
 
+export interface ApiPlayer {
+  userId: string
+  role: string
+  joinedAt?: string | null
+  memberType: string
+  displayName: string
+  firstName?: string
+  lastName?: string
+  isTeamMember: boolean
+}
+
+export interface ApiRecordedByInfo {
+  userId: string
+  displayName: string
+  firstName: string
+  lastName: string
+  emailAddress: string
+  imageUrl?: string
+}
+
+export interface ApiMatchEvent {
+  id: number
+  matchId: number
+  teamId: number
+  teamName: string
+  userId: string
+  eventType: string
+  minute: number
+  relatedUserId?: string | null
+  notes?: string | null
+  recordedBy: string
+  createdAt: string
+  updatedAt: string
+  player: ApiPlayer
+  relatedPlayer?: ApiPlayer | null
+  recordedByInfo: ApiRecordedByInfo
+}
+
 export interface ApiMatchResult {
   id: number
   matchId: number
@@ -123,6 +161,7 @@ export interface ApiMatch {
   venueId?: number
   venue?: ApiVenue
   result?: ApiMatchResult
+  events?: ApiMatchEvent[]
 }
 
 export interface ApiTeamStatsStanding {

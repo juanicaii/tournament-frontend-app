@@ -53,6 +53,21 @@ export interface Goal {
   assistPlayerName?: string
 }
 
+export interface MatchEvent {
+  id: string
+  playerId: string
+  playerName: string
+  teamId: string
+  minute: number
+  type: 'goal' | 'yellow_card' | 'red_card' | 'substitution'
+  subType?: 'regular' | 'penalty' | 'own_goal' | 'free_kick'
+  assistPlayerId?: string
+  assistPlayerName?: string
+  // For substitutions: playerId/playerName = player coming in, relatedPlayerId/relatedPlayerName = player going out
+  relatedPlayerId?: string
+  relatedPlayerName?: string
+}
+
 export interface MatchResultData {
   id: number
   matchId: number
@@ -93,6 +108,7 @@ export interface Match {
   awayTeamName?: string
   result?: MatchResultData
   goals?: Goal[]
+  events?: MatchEvent[]
 }
 
 export interface Standing {

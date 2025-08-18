@@ -8,7 +8,8 @@ import {
   ApiTeamStatsResponse,
   TournamentFilters,
   MatchFilters,
-  ApiStanding
+  ApiStanding,
+  ApiMatchEvent
 } from '../types/api'
 import { 
   Tournament, 
@@ -16,7 +17,9 @@ import {
   Standing, 
   Match, 
   PlayerStats, 
-  TournamentData 
+  TournamentData,
+  Goal,
+  MatchEvent 
 } from '../types/tournament'
 
 class TournamentService {
@@ -119,7 +122,63 @@ class TournamentService {
     }
   }
 
+  mapApiEventsToMatchEvents(events: ApiMatchEvent[]): MatchEvent[] {
+    return events
+      .filter(event => ['goal', 'yellow_card', 'red_card', 'substitution'].includes(event.eventType))
+      .map(event => {
+        const playerName = event.player.firstName && event.player.lastName 
+          ? `${event.player.firstName} ${event.player.lastName}`
+          : event.player.displayName
+        
+        const relatedPlayerName = event.relatedPlayer?.firstName && event.relatedPlayer?.lastName
+          ? `${event.relatedPlayer.firstName} ${event.relatedPlayer.lastName}`
+          : event.relatedPlayer?.displayName
+
+        return {
+          id: event.id.toString(),
+          playerId: event.userId,
+          playerName,
+          teamId: event.teamId.toString(),
+          minute: event.minute,
+          type: event.eventType as 'goal' | 'yellow_card' | 'red_card' | 'substitution',
+          subType: event.eventType === 'goal' ? 'regular' : undefined,
+          assistPlayerId: event.eventType === 'goal' ? event.relatedUserId || undefined : undefined,
+          assistPlayerName: event.eventType === 'goal' ? relatedPlayerName || undefined : undefined,
+          relatedPlayerId: event.eventType === 'substitution' ? event.relatedUserId || undefined : undefined,
+          relatedPlayerName: event.eventType === 'substitution' ? relatedPlayerName || undefined : undefined
+        }
+      })
+  }
+
+  mapApiEventsToGoals(events: ApiMatchEvent[]): Goal[] {
+    return events
+      .filter(event => event.eventType === 'goal')
+      .map(event => {
+        const playerName = event.player.firstName && event.player.lastName 
+          ? `${event.player.firstName} ${event.player.lastName}`
+          : event.player.displayName
+        
+        const assistPlayerName = event.relatedPlayer?.firstName && event.relatedPlayer?.lastName
+          ? `${event.relatedPlayer.firstName} ${event.relatedPlayer.lastName}`
+          : event.relatedPlayer?.displayName
+
+        return {
+          id: event.id.toString(),
+          playerId: event.userId,
+          playerName,
+          teamId: event.teamId.toString(),
+          minute: event.minute,
+          type: 'regular' as const,
+          assistPlayerId: event.relatedUserId || undefined,
+          assistPlayerName: assistPlayerName || undefined
+        }
+      })
+  }
+
   mapApiMatchToMatch(apiMatch: ApiMatch): Match {
+    const goals = apiMatch.events ? this.mapApiEventsToGoals(apiMatch.events) : []
+    const events = apiMatch.events ? this.mapApiEventsToMatchEvents(apiMatch.events) : []
+    
     return {
       id: apiMatch.id.toString(),
       tournamentId: apiMatch.tournamentId.toString(),
@@ -131,7 +190,9 @@ class TournamentService {
       matchday: apiMatch.round,
       status: this.mapMatchStatus(apiMatch.status),
       venue: apiMatch.venue?.name,
-      phase: apiMatch.phase
+      phase: apiMatch.phase,
+      goals: goals.length > 0 ? goals : undefined,
+      events: events.length > 0 ? events : undefined
     }
   }
 
