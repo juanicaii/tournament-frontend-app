@@ -1,7 +1,7 @@
 {
   "metadata": {
     "id": "default",
-    "name": "Sanpa League - Default",
+    "name": "Sanpa League",
     "description": "Tema por defecto para gestión de torneos",
     "category": "sport",
     "version": "1.0.0",
@@ -110,7 +110,8 @@
     "logo": "./logo.png",
     "logoSmall": "./logo.png",
     "favicon": "./favicon.ico",
-    "preview": "./preview.png"
+    "preview": "./preview.png",
+    "iso": "iso.png"
   },
   
   "typography": {
