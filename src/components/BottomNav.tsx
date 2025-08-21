@@ -52,7 +52,7 @@ function GlobalBottomNav() {
   const location = useLocation()
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-background border-t md:hidden">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-background border-t md:hidden pwa-bottom-nav">
       <div className="grid grid-cols-4 h-16">
         {globalNavItems.map(({ to, icon: Icon, label }) => {
           const isActive = location.pathname === to || 
@@ -89,7 +89,7 @@ function TournamentBottomNav({ tournamentId, currentTab }: { tournamentId: strin
   }
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-background border-t md:hidden">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-background border-t md:hidden pwa-bottom-nav h-24 pt-2">
       <div className="grid grid-cols-4 h-16">
         {tournamentNavItems.map(({ tab, icon: Icon, label }) => {
           const isActive = currentTab === tab

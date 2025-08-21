@@ -3,6 +3,7 @@ import { Trophy, Target} from 'lucide-react'
 import { PlayerStats, Player, Team } from '../types/tournament'
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
 import { cn } from '../lib/utils'
+import TeamAvatar from './TeamAvatar'
 
 interface PlayersTableProps {
   playerStats: PlayerStats[]
@@ -173,16 +174,7 @@ export default function PlayersTable({ playerStats, players, teams }: PlayersTab
                       </td>
                       <td>
                         <div className="flex items-center space-x-2">
-                          {team?.logo && (
-                            <img
-                              src={team.logo}
-                              alt={team.name}
-                              className="w-5 h-5 object-contain"
-                              onError={(e) => {
-                                (e.target as HTMLImageElement).style.display = 'none'
-                              }}
-                            />
-                          )}
+                          <TeamAvatar team={team} size="sm" />
                           <span className="text-sm font-medium">{team?.name}</span>
                         </div>
                       </td>

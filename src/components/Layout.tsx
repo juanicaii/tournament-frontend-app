@@ -14,7 +14,7 @@ export default function Layout({ children }: LayoutProps) {
     <div className="min-h-screen bg-background text-foreground">
       <Header />
       
-      <main className="pb-16 md:pb-0">
+      <main className="pwa-content md:pb-0">
         {children}
       </main>
       

@@ -10,9 +10,9 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
       manifest: {
-        name: 'Sampa League',
-        short_name: 'Sampa League',
-        description: 'Liga de fútbol de Sampa',
+        name: 'Sanpa League',
+        short_name: 'Sanpa League',
+        description: 'Liga de fútbol de Sanpa',
         theme_color: '#195d2c',
         background_color: '#000000',
         display: 'standalone',

@@ -2,6 +2,7 @@ import { Clock, MapPin } from 'lucide-react'
 import { Match, Team, Goal, MatchEvent } from '../types/tournament'
 import { Card, CardContent } from './ui/card'
 import { cn, groupBy } from '../lib/utils'
+import TeamAvatar from './TeamAvatar'
 
 interface MatchesTableProps {
   matches: Match[]
@@ -43,14 +44,7 @@ export default function MatchesTable({ matches, teams }: MatchesTableProps) {
     }
   }
 
-  const getTeamInitials = (name?: string, teamId?: string) => {
-    if (name && name.trim().length > 0) {
-      const parts = name.trim().split(' ')
-      const initials = (parts[0][0] || '') + (parts[1]?.[0] || '')
-      return initials.toUpperCase()
-    }
-    return teamId ? `T${teamId.slice(-1)}` : 'T?'
-  }
+
 
   const getTeamGoals = (match: Match, teamId: string | number): Goal[] => {
     const goals = match.goals || []
@@ -230,10 +224,12 @@ export default function MatchesTable({ matches, teams }: MatchesTableProps) {
                       <div className="mt-3">
                         <div className="grid grid-cols-3 items-center pb-2">
                           <div className="flex items-center space-x-3">
-                            <div className="h-8 w-8 rounded-full bg-gray-100 flex items-center justify-center text-xs font-semibold"
-                                 style={{ backgroundColor: homeTeam?.colors?.primary || '#666', color: '#fff' }}>
-                              {getTeamInitials(homeTeam?.name, String(match.homeTeamId))}
-                            </div>
+                            <TeamAvatar 
+                              team={homeTeam} 
+                              teamName={match.homeTeamName} 
+                              teamId={match.homeTeamId} 
+                              size="lg" 
+                            />
                             <div className="min-w-0">
                               <p className="font-medium truncate text-sm">
                                 {homeTeam?.name || match.homeTeamName || `Ind${String(match.homeTeamId).slice(-1)}`}
@@ -263,10 +259,12 @@ export default function MatchesTable({ matches, teams }: MatchesTableProps) {
                               </p>
                               <p className="text-[11px] text-muted-foreground">Visitante</p>
                             </div>
-                            <div className="h-8 w-8 rounded-full bg-gray-100 flex items-center justify-center text-xs font-semibold"
-                                 style={{ backgroundColor: awayTeam?.colors?.primary || '#666', color: '#fff' }}>
-                              {getTeamInitials(awayTeam?.name, String(match.awayTeamId))}
-                            </div>
+                            <TeamAvatar 
+                              team={awayTeam} 
+                              teamName={match.awayTeamName} 
+                              teamId={match.awayTeamId} 
+                              size="lg" 
+                            />
                           </div>
                         </div>
 

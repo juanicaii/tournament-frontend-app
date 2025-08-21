@@ -29,7 +29,7 @@ VITE_API_BASE_URL=http://localhost:3000/api/public/tournaments
 VITE_BRAND_CONFIG_ID=default
 
 # App Configuration
-VITE_APP_NAME=Sampa League
+VITE_APP_NAME=Sanpa League
 VITE_APP_VERSION=1.0.0
 ```
 

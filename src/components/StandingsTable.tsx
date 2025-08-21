@@ -3,6 +3,7 @@ import { ChevronUp, ChevronDown } from 'lucide-react'
 import { Standing, Team } from '../types/tournament'
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
 import { getTeamFormColor, cn } from '../lib/utils'
+import TeamAvatar from './TeamAvatar'
 
 interface StandingsTableProps {
   standings: Standing[]
@@ -110,16 +111,7 @@ export default function StandingsTable({ standings, teams, playoffTeamsCount }: 
                     <td className="font-medium">{standing.position}</td>
                     <td>
                       <div className="flex items-center space-x-3">
-                        {team?.logo && (
-                          <img
-                            src={team.logo}
-                            alt={team.name}
-                            className="w-6 h-6 object-contain"
-                            onError={(e) => {
-                              (e.target as HTMLImageElement).style.display = 'none'
-                            }}
-                          />
-                        )}
+                        <TeamAvatar team={team} size="md" />
                         <div>
                           <p className="font-medium">{team?.name}</p>
                           <p className="text-xs text-muted-foreground md:hidden">

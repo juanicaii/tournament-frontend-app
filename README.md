@@ -1,4 +1,4 @@
-# ⚽ Sampa League - Progressive Web App
+# ⚽ Sanpa League - Progressive Web App
 
 Una Progressive Web App moderna para visualizar y gestionar datos de torneos de fútbol, desarrollada con React, TypeScript, y un sistema de branding dinámico.
 
@@ -96,7 +96,7 @@ public/
 ```bash
 # Clonar el repositorio
 git clone <repo-url>
-cd sampa-league-pwa
+cd Sanpa-league-pwa
 
 # Instalar dependencias
 npm install
@@ -237,7 +237,7 @@ La app se puede instalar como PWA nativa en dispositivos móviles y desktop.
 # .env
 VITE_BRAND_CONFIG_ID=default          # Tema por defecto
 VITE_API_BASE_URL=https://api.example.com  # URL de API
-VITE_APP_NAME=Sampa League            # Nombre de la app
+VITE_APP_NAME=Sanpa League            # Nombre de la app
 VITE_APP_VERSION=1.0.0                # Versión
 ```
 
@@ -330,4 +330,4 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más det
 
 ---
 
-**Sampa League** - Gestión profesional de torneos de fútbol ⚽
+**Sanpa League** - Gestión profesional de torneos de fútbol ⚽

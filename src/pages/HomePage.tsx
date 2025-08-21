@@ -57,7 +57,7 @@ export default function HomePage() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold mb-2">
-              Bienvenido a {config?.app.name || 'Sampa League'}
+              Bienvenido a {config?.app.name || 'Sanpa League'}
             </h1>
             
           </div>

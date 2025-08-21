@@ -16,6 +16,21 @@ export interface Tournament {
   playoffTeamsCount?: number
 }
 
+export interface TeamMember {
+  id: number
+  firstName: string
+  lastName: string
+  fullName: string
+  dni?: string | null
+  tshirtNumber: number
+  dateOfBirth?: string | null
+  joinedAt: string
+  goals:number,
+  yellowCards:number,
+  redCards:number
+         
+}
+
 export interface Team {
   id: string
   name: string
@@ -29,6 +44,8 @@ export interface Team {
     primary: string
     secondary: string
   }
+  members?: TeamMember[]
+  membersCount?: number
 }
 
 export interface Player {

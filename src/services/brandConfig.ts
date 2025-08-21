@@ -31,7 +31,7 @@ class BrandConfigService {
     const defaultConfig: BrandConfig = {
       metadata: {
         id: 'default',
-        name: 'Sampa League - Default',
+        name: 'Sanpa League - Default',
         description: 'Tema por defecto para gestión de torneos',
         category: 'sport',
         version: '1.0.0',
@@ -39,7 +39,7 @@ class BrandConfigService {
         created: '2024-01-15'
       },
       app: {
-        name: 'Sampa League',
+        name: 'Sanpa League',
         slogan: 'Gestión profesional de torneos',
         description: 'Progressive Web App para gestión y visualización de torneos de fútbol'
       },

@@ -1,4 +1,4 @@
-import { Tournament, Team, Player, Match, Standing, PlayerStats, TeamStats, TournamentData } from '../types/tournament'
+import { Tournament, Team, TeamMember, Player, Match, Standing, PlayerStats, TeamStats, TournamentData } from '../types/tournament'
 
 // Mock Tournaments
 export const tournaments: Tournament[] = [
@@ -57,7 +57,36 @@ export const argentineTeams: Team[] = [
     stadium: 'La Bombonera',
     city: 'Buenos Aires',
     country: 'Argentina',
-    colors: { primary: '#003f7f', secondary: '#ffd700' }
+    colors: { primary: '#003f7f', secondary: '#ffd700' },
+    logo: 'https://logoeps.com/wp-content/uploads/2013/03/boca-juniors-vector-logo.png',
+    members: [
+      {
+        id: 1,
+        firstName: 'Lionel',
+        lastName: 'Messi',
+        fullName: 'Lionel Sebastián Messi',
+        dni: '20123456789',
+        tshirtNumber: 10,
+        dateOfBirth: '1987-06-24',
+        joinedAt: '2024-01-15T10:00:00.000Z',
+        goals:0,
+        yellowCards:0,
+        redCards:0
+      },
+      {
+        id: 2,
+        firstName: 'Sergio',
+        lastName: 'Romero',
+        fullName: 'Sergio Germán Romero',
+        dni: '20987654321',
+        tshirtNumber: 1,
+        dateOfBirth: '1987-02-22',
+        joinedAt: '2024-01-15T10:00:00.000Z', goals:0,
+        yellowCards:0,
+        redCards:0
+      }
+    ],
+    membersCount: 2
   },
   {
     id: 'river-plate',
@@ -67,7 +96,37 @@ export const argentineTeams: Team[] = [
     stadium: 'Estadio Monumental',
     city: 'Buenos Aires',
     country: 'Argentina',
-    colors: { primary: '#ff0000', secondary: '#ffffff' }
+    colors: { primary: '#ff0000', secondary: '#ffffff' },
+    logo: 'https://logoeps.com/wp-content/uploads/2013/03/river-plate-vector-logo.png',
+    members: [
+      {
+        id: 3,
+        firstName: 'Julián',
+        lastName: 'Álvarez',
+        fullName: 'Julián Álvarez',
+        dni: '20111222333',
+        tshirtNumber: 9,
+        dateOfBirth: '2000-01-31',
+        joinedAt: '2024-01-15T10:00:00.000Z',
+         goals:0,
+        yellowCards:0,
+        redCards:0
+      },
+      {
+        id: 4,
+        firstName: 'Franco',
+        lastName: 'Armani',
+        fullName: 'Franco Armani',
+        dni: '20444555666',
+        tshirtNumber: 1,
+        dateOfBirth: '1986-10-16',
+        joinedAt: '2024-01-15T10:00:00.000Z',
+         goals:0,
+        yellowCards:0,
+        redCards:0
+      }
+    ],
+    membersCount: 2
   },
   {
     id: 'racing-club',
@@ -77,7 +136,23 @@ export const argentineTeams: Team[] = [
     stadium: 'Estadio Presidente Perón',
     city: 'Avellaneda',
     country: 'Argentina',
-    colors: { primary: '#5cb3cc', secondary: '#ffffff' }
+    colors: { primary: '#5cb3cc', secondary: '#ffffff' },
+    members: [
+      {
+        id: 5,
+        firstName: 'Cristian',
+        lastName: 'Romero',
+        fullName: 'Cristian Gabriel Romero',
+        dni: '20777888999',
+        tshirtNumber: 4,
+        dateOfBirth: '1998-04-27',
+        joinedAt: '2024-01-15T10:00:00.000Z',
+         goals:0,
+        yellowCards:0,
+        redCards:0
+      }
+    ],
+    membersCount: 1
   },
   {
     id: 'independiente',
@@ -87,7 +162,23 @@ export const argentineTeams: Team[] = [
     stadium: 'Estadio Libertadores de América',
     city: 'Avellaneda',
     country: 'Argentina',
-    colors: { primary: '#dc143c', secondary: '#ffffff' }
+    colors: { primary: '#dc143c', secondary: '#ffffff' },
+    members: [
+      {
+        id: 6,
+        firstName: 'Lautaro',
+        lastName: 'Martínez',
+        fullName: 'Lautaro Javier Martínez',
+        dni: '20123789456',
+        tshirtNumber: 22,
+        dateOfBirth: '1997-08-22',
+        joinedAt: '2024-01-15T10:00:00.000Z',
+         goals:0,
+        yellowCards:0,
+        redCards:0
+      }
+    ],
+    membersCount: 1
   },
   {
     id: 'san-lorenzo',
@@ -97,7 +188,23 @@ export const argentineTeams: Team[] = [
     stadium: 'Estadio Pedro Bidegain',
     city: 'Buenos Aires',
     country: 'Argentina',
-    colors: { primary: '#003f7f', secondary: '#dc143c' }
+    colors: { primary: '#003f7f', secondary: '#dc143c' },
+    members: [
+      {
+        id: 7,
+        firstName: 'Enzo',
+        lastName: 'Fernández',
+        fullName: 'Enzo Jeremías Fernández',
+        dni: '20456123789',
+        tshirtNumber: 8,
+        dateOfBirth: '2001-01-17',
+        joinedAt: '2024-01-15T10:00:00.000Z',
+         goals:0,
+        yellowCards:0,
+        redCards:0
+      }
+    ],
+    membersCount: 1
   },
   {
     id: 'estudiantes',
@@ -107,7 +214,23 @@ export const argentineTeams: Team[] = [
     stadium: 'Estadio Jorge Luis Hirschi',
     city: 'La Plata',
     country: 'Argentina',
-    colors: { primary: '#dc143c', secondary: '#ffffff' }
+    colors: { primary: '#dc143c', secondary: '#ffffff' },
+    members: [
+      {
+        id: 8,
+        firstName: 'Alexis',
+        lastName: 'Mac Allister',
+        fullName: 'Alexis Mac Allister',
+        dni: '20789456123',
+        tshirtNumber: 20,
+        dateOfBirth: '1998-12-24',
+        joinedAt: '2024-01-15T10:00:00.000Z',
+         goals:0,
+        yellowCards:0,
+        redCards:0
+      }
+    ],
+    membersCount: 1
   }
 ]
 

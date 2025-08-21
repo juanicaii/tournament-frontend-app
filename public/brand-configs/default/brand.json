@@ -1,7 +1,7 @@
 {
   "metadata": {
     "id": "default",
-    "name": "Sampa League - Default",
+    "name": "Sanpa League - Default",
     "description": "Tema por defecto para gestión de torneos",
     "category": "sport",
     "version": "1.0.0",
@@ -10,7 +10,7 @@
   },
   
   "app": {
-    "name": "Sampa League",
+    "name": "Sanpa League",
     "slogan": "",
     "description": "Progressive Web App para gestión y visualización de torneos de fútbol"
   },

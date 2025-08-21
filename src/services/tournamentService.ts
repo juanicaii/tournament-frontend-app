@@ -102,7 +102,9 @@ class TournamentService {
       colors: {
         primary: '#1f2937',
         secondary: '#374151'
-      }
+      },
+      members: apiTeam.members,
+      membersCount: apiTeam.membersCount
     }
   }
 
@@ -119,6 +121,7 @@ class TournamentService {
       goalDifference: apiStanding.goalDifference,
       points: apiStanding.points,
       form: apiStanding.form
+
     }
   }
 

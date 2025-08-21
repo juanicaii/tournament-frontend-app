@@ -32,6 +32,21 @@ export default function Header() {
         </Link>
 
         <div className="flex flex-1 items-center justify-end space-x-2">
+         <span className='text-sm text-muted-foreground font-thin italic hidden md:flex'>
+          Develop by
+         </span>
+         <img 
+         onClick={() => {
+          window.open('https://jssoftware.com.ar', '_blank')
+         }}
+          src="/logo.png" 
+          alt="Logo" 
+          className="h-20 w-20 cursor-pointer"
+          onError={(e) => {
+            (e.target as HTMLImageElement).style.display = 'none'
+          }}
+         />
+
         </div>
       </div>
     </header>

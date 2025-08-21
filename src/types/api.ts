@@ -1,3 +1,5 @@
+import { TeamMember } from "./tournament"
+
 export interface ApiResponse<T> {
   data?: T
   message?: string
@@ -44,6 +46,8 @@ export interface ApiTeam {
   goalsAgainst?: number
   goalDifference?: number
   position?: number
+  members:TeamMember[]
+  membersCount:number
 }
 
 export interface ApiStanding {

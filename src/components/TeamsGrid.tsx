@@ -1,8 +1,10 @@
 import { useState } from 'react'
-import { MapPin, Calendar, Home, Search } from 'lucide-react'
-import { Team } from '../types/tournament'
+import { MapPin, Calendar, Home, Search, Users } from 'lucide-react'
+import { Team, TeamMember } from '../types/tournament'
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
 import { Button } from './ui/button'
+import TeamAvatar from './TeamAvatar'
+import TeamMembersModal from './TeamMembersModal'
 
 interface TeamsGridProps {
   teams: Team[]
@@ -11,6 +13,18 @@ interface TeamsGridProps {
 export default function TeamsGrid({ teams }: TeamsGridProps) {
   const [searchQuery, setSearchQuery] = useState('')
   const [sortBy, setSortBy] = useState<'name' | 'city' | 'founded'>('name')
+  const [selectedTeam, setSelectedTeam] = useState<Team | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const openTeamModal = (team: Team) => {
+    setSelectedTeam(team)
+    setIsModalOpen(true)
+  }
+
+  const closeTeamModal = () => {
+    setSelectedTeam(null)
+    setIsModalOpen(false)
+  }
 
   const filteredAndSortedTeams = teams
     .filter(team => 
@@ -38,7 +52,7 @@ export default function TeamsGrid({ teams }: TeamsGridProps) {
         <CardContent className="p-4">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
             {/* Search */}
-            <div className="relative flex-1 max-w-md">
+            <div className="relative flex-1 max-w-full">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
               <input
                 type="text"
@@ -49,19 +63,7 @@ export default function TeamsGrid({ teams }: TeamsGridProps) {
               />
             </div>
 
-            {/* Sort Options */}
-            <div className="flex items-center space-x-2">
-              <span className="text-sm text-muted-foreground">Ordenar por:</span>
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value as typeof sortBy)}
-                className="text-sm border border-input rounded px-3 py-1 bg-background"
-              >
-                <option value="name">Nombre</option>
-                <option value="city">Ciudad</option>
-                <option value="founded">Año de fundación</option>
-              </select>
-            </div>
+          
           </div>
         </CardContent>
       </Card>
@@ -72,16 +74,7 @@ export default function TeamsGrid({ teams }: TeamsGridProps) {
           <Card key={team.id} className="tournament-card">
             <CardHeader className="pb-3">
               <div className="flex items-start space-x-3">
-                {team.logo && (
-                  <img
-                    src={team.logo}
-                    alt={`${team.name} logo`}
-                    className="w-12 h-12 object-contain rounded"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).style.display = 'none'
-                    }}
-                  />
-                )}
+                <TeamAvatar team={team} size="xl" />
                 <div className="flex-1 min-w-0">
                   <CardTitle className="text-lg font-bold line-clamp-2">
                     {team.name}
@@ -93,30 +86,10 @@ export default function TeamsGrid({ teams }: TeamsGridProps) {
 
             <CardContent className="pt-0">
               <div className="space-y-3">
-                {/* City and Stadium */}
-                {(team.city || team.stadium) && (
-                  <div className="flex items-start space-x-2">
-                    <MapPin className="w-4 h-4 mt-0.5 text-muted-foreground flex-shrink-0" />
-                    <div className="text-sm">
-                      {team.city && (
-                        <p className="font-medium">{team.city}</p>
-                      )}
-                      {team.stadium && (
-                        <p className="text-muted-foreground">{team.stadium}</p>
-                      )}
-                    </div>
-                  </div>
-                )}
+                
+                
 
-                {/* Founded */}
-                {team.founded && (
-                  <div className="flex items-center space-x-2">
-                    <Calendar className="w-4 h-4 text-muted-foreground" />
-                    <span className="text-sm text-muted-foreground">
-                      Fundado en {team.founded}
-                    </span>
-                  </div>
-                )}
+              
 
                 
          
@@ -127,7 +100,18 @@ export default function TeamsGrid({ teams }: TeamsGridProps) {
                     <Home className="w-4 h-4 mr-2" />
                     Ver detalles
                   </Button>
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="flex-1"
+                    onClick={() => openTeamModal(team)}
+                  >
+                    <Users className="w-4 h-4 mr-2" />
+                    Miembros {team.membersCount}
+                  </Button>
                 </div>
+
+
               </div>
             </CardContent>
           </Card>
@@ -151,6 +135,13 @@ export default function TeamsGrid({ teams }: TeamsGridProps) {
       <div className="text-center text-sm text-muted-foreground">
         Mostrando {filteredAndSortedTeams.length} de {teams.length} equipos
       </div>
+
+      {/* Team Members Modal */}
+      <TeamMembersModal 
+        team={selectedTeam}
+        isOpen={isModalOpen}
+        onClose={closeTeamModal}
+      />
     </div>
   )
 }
