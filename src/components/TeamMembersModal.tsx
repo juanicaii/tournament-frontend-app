@@ -1,5 +1,5 @@
 import { X, User, Calendar, Trophy, Target, Square } from 'lucide-react'
-import { Team, TeamMember } from '../types/tournament'
+import { Team } from '../types/tournament'
 import { Button } from './ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
 

@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { MapPin, Calendar, Home, Search, Users } from 'lucide-react'
-import { Team, TeamMember } from '../types/tournament'
+import {  Home, Search, Users } from 'lucide-react'
+import { Team } from '../types/tournament'
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
 import { Button } from './ui/button'
 import TeamAvatar from './TeamAvatar'
@@ -12,7 +12,7 @@ interface TeamsGridProps {
 
 export default function TeamsGrid({ teams }: TeamsGridProps) {
   const [searchQuery, setSearchQuery] = useState('')
-  const [sortBy, setSortBy] = useState<'name' | 'city' | 'founded'>('name')
+  const [sortBy] = useState<'name' | 'city' | 'founded'>('name')
   const [selectedTeam, setSelectedTeam] = useState<Team | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
 

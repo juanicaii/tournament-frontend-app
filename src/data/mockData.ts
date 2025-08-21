@@ -1,4 +1,4 @@
-import { Tournament, Team, TeamMember, Player, Match, Standing, PlayerStats, TeamStats, TournamentData } from '../types/tournament'
+import { Tournament, Team, Player, Match, Standing, PlayerStats, TeamStats, TournamentData } from '../types/tournament'
 
 // Mock Tournaments
 export const tournaments: Tournament[] = [
