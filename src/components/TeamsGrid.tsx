@@ -96,10 +96,7 @@ export default function TeamsGrid({ teams }: TeamsGridProps) {
 
                 {/* Action Buttons */}
                 <div className="flex space-x-2 pt-2">
-                  <Button variant="outline" size="sm" className="flex-1">
-                    <Home className="w-4 h-4 mr-2" />
-                    Ver detalles
-                  </Button>
+                  
                   <Button 
                     variant="outline" 
                     size="sm" 
