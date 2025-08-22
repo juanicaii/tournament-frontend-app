@@ -4,6 +4,7 @@ import Layout from './components/Layout'
 import HomePage from './pages/HomePage'
 import TournamentPage from './pages/TournamentPage'
 import InstallPWAModal from './components/InstallPWAModal'
+import PWADebug from './components/PWADebug'
 import { PWAProvider, usePWAInstall } from './contexts/PWAContext'
 import { Loader2 } from 'lucide-react'
 
@@ -45,7 +46,7 @@ function AppContent() {
         </Routes>
       </Layout>
       
-     
+      <PWADebug />
       
       <InstallPWAModal 
         isOpen={showInstallModal} 

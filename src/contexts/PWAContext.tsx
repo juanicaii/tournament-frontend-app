@@ -40,11 +40,11 @@ export const PWAProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       console.log('PWA Context: hasShownInstallPrompt:', hasShownInstallPrompt);
       
       if (!hasShownInstallPrompt) {
-        console.log('PWA Context: Programando modal para mostrar en 3 segundos');
+        console.log('PWA Context: Programando modal para mostrar en 5 segundos');
         setTimeout(() => {
-          console.log('PWA Context: Mostrando modal de instalación');
+          console.log('PWA Context: Mostrando modal de instalación automático');
           setShowInstallModal(true);
-        }, 3000);
+        }, 5000); // Aumenté el tiempo para dar más oportunidad al usuario
       }
     };
 
@@ -61,6 +61,13 @@ export const PWAProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     const isInWebAppiOS = (window.navigator as any).standalone === true;
     const isInstalled = isStandalone || isInWebAppiOS;
     
+    console.log('PWA Context: Estado de instalación:', {
+      isStandalone,
+      isInWebAppiOS,
+      isInstalled,
+      hostname: window.location.hostname
+    });
+    
     if (isInstalled) {
       console.log('PWA Context: App ya está instalada');
       setIsInstallable(false);
@@ -72,6 +79,8 @@ export const PWAProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         console.log('PWA Context: Modo desarrollo - habilitando instalación para testing');
         setIsInstallable(true);
       }
+      // En producción, esperar el evento beforeinstallprompt
+      console.log('PWA Context: Esperando evento beforeinstallprompt en producción');
     }
 
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
@@ -88,6 +97,26 @@ export const PWAProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
           setShowInstallModal(true);
         }
       }, 8000); // Aumenté a 8 segundos para evitar conflictos
+    }
+    
+    // Verificar criterios PWA en producción
+    if (!isDev && !isInstalled) {
+      // Verificar que el sitio cumpla con los criterios PWA
+      console.log('PWA Context: Verificando criterios PWA en producción');
+      
+      // Verificar HTTPS
+      const isHTTPS = window.location.protocol === 'https:';
+      console.log('PWA Context: HTTPS:', isHTTPS);
+      
+      // Verificar service worker
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(registrations => {
+          console.log('PWA Context: Service Workers registrados:', registrations.length);
+          if (registrations.length > 0) {
+            console.log('PWA Context: Service Worker activo, PWA puede ser instalable');
+          }
+        });
+      }
     }
 
     return () => {
@@ -141,7 +170,21 @@ export const PWAProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
   const showInstallPrompt = () => {
     console.log('PWA Context: Mostrando prompt de instalación manualmente');
-    setShowInstallModal(true);
+    console.log('PWA Context: Estado actual:', {
+      deferredPrompt: !!deferredPrompt,
+      isInstallable,
+      showInstallModal
+    });
+    
+    if (deferredPrompt) {
+      // Si hay un prompt nativo disponible, usarlo directamente
+      console.log('PWA Context: Usando prompt nativo');
+      installPWA();
+    } else {
+      // Si no hay prompt nativo, mostrar modal personalizado
+      console.log('PWA Context: Mostrando modal personalizado');
+      setShowInstallModal(true);
+    }
   };
 
   const forceShowInstallModal = () => {
