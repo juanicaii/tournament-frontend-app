@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import {  Home, Search, Users } from 'lucide-react'
+import {  Search, Users } from 'lucide-react'
 import { Team } from '../types/tournament'
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
 import { Button } from './ui/button'
