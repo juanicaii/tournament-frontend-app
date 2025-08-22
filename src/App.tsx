@@ -46,7 +46,7 @@ function AppContent() {
         </Routes>
       </Layout>
       
-      <PWADebug />
+      {/* <PWADebug /> */}
       
       <InstallPWAModal 
         isOpen={showInstallModal} 
