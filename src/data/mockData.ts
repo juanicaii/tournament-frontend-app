@@ -71,7 +71,8 @@ export const argentineTeams: Team[] = [
         joinedAt: '2024-01-15T10:00:00.000Z',
         goals:0,
         yellowCards:0,
-        redCards:0
+        redCards:0,
+        blueCards:1
       },
       {
         id: 2,
@@ -83,7 +84,8 @@ export const argentineTeams: Team[] = [
         dateOfBirth: '1987-02-22',
         joinedAt: '2024-01-15T10:00:00.000Z', goals:0,
         yellowCards:0,
-        redCards:0
+        redCards:0,
+        blueCards:0
       }
     ],
     membersCount: 2
@@ -110,7 +112,8 @@ export const argentineTeams: Team[] = [
         joinedAt: '2024-01-15T10:00:00.000Z',
          goals:0,
         yellowCards:0,
-        redCards:0
+        redCards:0,
+        blueCards:0
       },
       {
         id: 4,
@@ -123,7 +126,8 @@ export const argentineTeams: Team[] = [
         joinedAt: '2024-01-15T10:00:00.000Z',
          goals:0,
         yellowCards:0,
-        redCards:0
+        redCards:0,
+        blueCards:0
       }
     ],
     membersCount: 2
@@ -149,7 +153,8 @@ export const argentineTeams: Team[] = [
         joinedAt: '2024-01-15T10:00:00.000Z',
          goals:0,
         yellowCards:0,
-        redCards:0
+        redCards:0,
+        blueCards:0
       }
     ],
     membersCount: 1
@@ -175,7 +180,8 @@ export const argentineTeams: Team[] = [
         joinedAt: '2024-01-15T10:00:00.000Z',
          goals:0,
         yellowCards:0,
-        redCards:0
+        redCards:0,
+        blueCards:0
       }
     ],
     membersCount: 1
@@ -201,7 +207,8 @@ export const argentineTeams: Team[] = [
         joinedAt: '2024-01-15T10:00:00.000Z',
          goals:0,
         yellowCards:0,
-        redCards:0
+        redCards:0,
+        blueCards:0
       }
     ],
     membersCount: 1
@@ -227,7 +234,8 @@ export const argentineTeams: Team[] = [
         joinedAt: '2024-01-15T10:00:00.000Z',
          goals:0,
         yellowCards:0,
-        redCards:0
+        redCards:0,
+        blueCards:0
       }
     ],
     membersCount: 1
@@ -385,6 +393,7 @@ export const argentinePlayerStats: PlayerStats[] = [
     minutesPlayed: 1260,
     yellowCards: 2,
     redCards: 0,
+    blueCards: 1,
     averageGoalsPerGame: 1.07
   },
   {
@@ -418,6 +427,7 @@ export const argentinePlayerStats: PlayerStats[] = [
     minutesPlayed: 1400,
     yellowCards: 4,
     redCards: 0,
+    blueCards: 2,
     averageGoalsPerGame: 0.33
   },
   {
@@ -462,6 +472,7 @@ export const argentineTeamStats: TeamStats[] = [
     cleanSheets: 8,
     yellowCards: 25,
     redCards: 1,
+    blueCards: 3,
     penaltiesFor: 3,
     penaltiesAgainst: 1
   },
@@ -481,6 +492,7 @@ export const argentineTeamStats: TeamStats[] = [
     cleanSheets: 6,
     yellowCards: 28,
     redCards: 2,
+    blueCards: 1,
     penaltiesFor: 4,
     penaltiesAgainst: 2
   }

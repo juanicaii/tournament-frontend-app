@@ -51,17 +51,18 @@ export default function MatchesTable({ matches, teams }: MatchesTableProps) {
     return goals.filter(goal => String(goal.teamId) === String(teamId))
   }
 
-  const getTeamEvents = (match: Match, teamId: string | number, eventType: 'goal' | 'yellow_card' | 'red_card' | 'substitution'): MatchEvent[] => {
+  const getTeamEvents = (match: Match, teamId: string | number, eventType: 'goal' | 'yellow_card' | 'red_card' | 'blue_card' | 'substitution'): MatchEvent[] => {
     const events = match.events || []
     return events.filter(event => 
       String(event.teamId) === String(teamId) && event.type === eventType
     )
   }
 
-  const getTeamCards = (match: Match, teamId: string | number): { yellow: MatchEvent[], red: MatchEvent[] } => {
+  const getTeamCards = (match: Match, teamId: string | number): { yellow: MatchEvent[], red: MatchEvent[], blue: MatchEvent[] } => {
     return {
       yellow: getTeamEvents(match, teamId, 'yellow_card'),
-      red: getTeamEvents(match, teamId, 'red_card')
+      red: getTeamEvents(match, teamId, 'red_card'),
+      blue: getTeamEvents(match, teamId, 'blue_card')
     }
   }
 
@@ -281,8 +282,8 @@ export default function MatchesTable({ matches, teams }: MatchesTableProps) {
                             const awaySubstitutions = getTeamSubstitutions(match, match.awayTeamId)
                             
                             const hasAnyEvents = homeGoals.length > 0 || awayGoals.length > 0 || 
-                                                homeCards.yellow.length > 0 || homeCards.red.length > 0 ||
-                                                awayCards.yellow.length > 0 || awayCards.red.length > 0 ||
+                                                homeCards.yellow.length > 0 || homeCards.red.length > 0 || homeCards.blue.length > 0 ||
+                                                awayCards.yellow.length > 0 || awayCards.red.length > 0 || awayCards.blue.length > 0 ||
                                                 homeSubstitutions.length > 0 || awaySubstitutions.length > 0
                             
                             if (hasAnyEvents) {
@@ -311,6 +312,13 @@ export default function MatchesTable({ matches, teams }: MatchesTableProps) {
                                       <div key={card.id} className="text-xs text-red-600">
                                         <span className="font-medium">{card.playerName}</span>
                                         <span className="ml-1 text-[10px]">({card.minute}') 🟥</span>
+                                      </div>
+                                    ))}
+                                    {/* Home blue cards */}
+                                    {homeCards.blue.map((card) => (
+                                      <div key={card.id} className="text-xs text-blue-600">
+                                        <span className="font-medium">{card.playerName}</span>
+                                        <span className="ml-1 text-[10px]">({card.minute}') 🟦</span>
                                       </div>
                                     ))}
                                     {/* Home substitutions */}
@@ -352,6 +360,13 @@ export default function MatchesTable({ matches, teams }: MatchesTableProps) {
                                     {awayCards.red.map((card) => (
                                       <div key={card.id} className="text-xs text-red-600">
                                         <span className="text-[10px]">🟥 ({card.minute}')</span>
+                                        <span className="ml-1 font-medium">{card.playerName}</span>
+                                      </div>
+                                    ))}
+                                    {/* Away blue cards */}
+                                    {awayCards.blue.map((card) => (
+                                      <div key={card.id} className="text-xs text-blue-600">
+                                        <span className="text-[10px]">🟦 ({card.minute}')</span>
                                         <span className="ml-1 font-medium">{card.playerName}</span>
                                       </div>
                                     ))}

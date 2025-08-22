@@ -204,6 +204,9 @@ export interface ApiTeamStatsResponse {
   standings: ApiTeamStatsStanding
   topScorers: ApiTeamStatsScorer[]
   recentMatches: ApiTeamStatsRecentMatch[]
+  yellowCards?: number
+  redCards?: number
+  blueCards?: number
 }
 
 export interface ApiError {

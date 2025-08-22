@@ -27,7 +27,8 @@ export interface TeamMember {
   joinedAt: string
   goals:number,
   yellowCards:number,
-  redCards:number
+  redCards:number,
+  blueCards?:number
          
 }
 
@@ -76,7 +77,7 @@ export interface MatchEvent {
   playerName: string
   teamId: string
   minute: number
-  type: 'goal' | 'yellow_card' | 'red_card' | 'substitution'
+  type: 'goal' | 'yellow_card' | 'red_card' | 'blue_card' | 'substitution'
   subType?: 'regular' | 'penalty' | 'own_goal' | 'free_kick'
   assistPlayerId?: string
   assistPlayerName?: string
@@ -151,6 +152,7 @@ export interface PlayerStats {
   minutesPlayed: number
   yellowCards: number
   redCards: number
+  blueCards?: number
   averageGoalsPerGame: number
 }
 
@@ -170,6 +172,7 @@ export interface TeamStats {
   cleanSheets: number
   yellowCards: number
   redCards: number
+  blueCards?: number
   penaltiesFor: number
   penaltiesAgainst: number
 }

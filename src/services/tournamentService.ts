@@ -127,7 +127,7 @@ class TournamentService {
 
   mapApiEventsToMatchEvents(events: ApiMatchEvent[]): MatchEvent[] {
     return events
-      .filter(event => ['goal', 'yellow_card', 'red_card', 'substitution'].includes(event.eventType))
+      .filter(event => ['goal', 'yellow_card', 'red_card', 'blue_card', 'substitution'].includes(event.eventType))
       .map(event => {
         const playerName = event.player.firstName && event.player.lastName 
           ? `${event.player.firstName} ${event.player.lastName}`
@@ -143,7 +143,7 @@ class TournamentService {
           playerName,
           teamId: event.teamId.toString(),
           minute: event.minute,
-          type: event.eventType as 'goal' | 'yellow_card' | 'red_card' | 'substitution',
+          type: event.eventType as 'goal' | 'yellow_card' | 'red_card' | 'blue_card' | 'substitution',
           subType: event.eventType === 'goal' ? 'regular' : undefined,
           assistPlayerId: event.eventType === 'goal' ? event.relatedUserId || undefined : undefined,
           assistPlayerName: event.eventType === 'goal' ? relatedPlayerName || undefined : undefined,

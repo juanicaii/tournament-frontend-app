@@ -129,6 +129,15 @@ export default function TeamMembersModal({ team, isOpen, onClose }: TeamMembersM
                               </span>
                               <span className="font-semibold">{member.redCards}</span>
                             </div>
+                            {member.blueCards !== undefined && (
+                              <div className="flex items-center justify-between">
+                                <span className="flex items-center">
+                                  <Square className="w-3 h-3 mr-1 text-blue-600 fill-blue-500" />
+                                  Azules
+                                </span>
+                                <span className="font-semibold">{member.blueCards}</span>
+                              </div>
+                            )}
                           </div>
                         </div>
                       </div>

@@ -69,3 +69,34 @@ export function isNetworkError(error: unknown): boolean {
      error.name === 'NetworkError')
   )
 }
+
+export function isBlueCardDisabledError(error: unknown): boolean {
+  if (error instanceof Error) {
+    return error.message.includes('Blue card events are not enabled')
+  }
+  
+  if (isApiError(error)) {
+    return error.message.includes('Blue card events are not enabled') || 
+           error.message.includes('ENABLE_BLUE_CARDS')
+  }
+  
+  return false
+}
+
+export function getBlueCardErrorMessage(): string {
+  return 'Las tarjetas azules no están habilitadas en este torneo. Contacte al administrador para activar esta funcionalidad.'
+}
+
+export function isEventTypeSupported(eventType: string, enabledFeatures?: { blueCards?: boolean }): boolean {
+  const baseEvents = ['goal', 'yellow_card', 'red_card', 'substitution']
+  
+  if (baseEvents.includes(eventType)) {
+    return true
+  }
+  
+  if (eventType === 'blue_card') {
+    return enabledFeatures?.blueCards ?? false
+  }
+  
+  return false
+}
