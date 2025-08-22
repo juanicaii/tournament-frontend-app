@@ -52,12 +52,7 @@ export default function Header() {
             </button>
           )}
           
-          {/* Debug info - solo en desarrollo */}
-          {(window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') && (
-            <div className="text-xs text-gray-500 ml-2">
-              PWA: {isInstallable ? '✅' : '❌'}
-            </div>
-          )}
+         
          <span className='text-sm text-muted-foreground font-thin italic hidden md:flex'>
           Develop by
          </span>

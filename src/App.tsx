@@ -12,7 +12,6 @@ function AppContent() {
   const { showInstallModal, installPWA, closeInstallModal, forceShowInstallModal, isInstallable } = usePWAInstall()
   
   // Verificar si estamos en desarrollo
-  const isDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
 
   if (loading) {
     return (
@@ -46,22 +45,7 @@ function AppContent() {
         </Routes>
       </Layout>
       
-      {/* Botón de testing PWA solo en desarrollo */}
-      {isDev && (
-        <div className="fixed bottom-4 right-4 z-50">
-          <button
-            onClick={forceShowInstallModal}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow-lg text-sm font-medium transition-colors"
-          >
-            🔧 Test PWA Install
-          </button>
-          {isInstallable && (
-            <div className="mt-2 text-xs text-green-600 bg-green-50 px-2 py-1 rounded">
-              ✅ PWA Ready
-            </div>
-          )}
-        </div>
-      )}
+     
       
       <InstallPWAModal 
         isOpen={showInstallModal} 
