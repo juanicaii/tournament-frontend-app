@@ -111,7 +111,7 @@ export interface Match {
   awayTeamId: string | number
   homeScore?: number // Legacy support
   awayScore?: number // Legacy support
-  date: Date
+  date?: Date
   scheduledAt?: string | null
   kickoffAt?: string
   matchday?: number // Legacy support

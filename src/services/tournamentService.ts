@@ -181,7 +181,7 @@ class TournamentService {
   mapApiMatchToMatch(apiMatch: ApiMatch): Match {
     const goals = apiMatch.events ? this.mapApiEventsToGoals(apiMatch.events) : []
     const events = apiMatch.events ? this.mapApiEventsToMatchEvents(apiMatch.events) : []
-    
+    console.log(apiMatch)
     return {
       id: apiMatch.id.toString(),
       tournamentId: apiMatch.tournamentId.toString(),
@@ -189,7 +189,7 @@ class TournamentService {
       awayTeamId: apiMatch.awayTeamId.toString(),
       homeScore: apiMatch.result?.homeScore,
       awayScore: apiMatch.result?.awayScore,
-      date: new Date(apiMatch.scheduledAt),
+      date: apiMatch.scheduledAt ? new Date(apiMatch.scheduledAt) : undefined,
       matchday: apiMatch.round,
       status: this.mapMatchStatus(apiMatch.status),
       venue: apiMatch.venue?.name,
@@ -280,11 +280,12 @@ class TournamentService {
     return 'league'
   }
 
-  private mapMatchStatus(status: string): 'scheduled' | 'live' | 'finished' {
+  private mapMatchStatus(status: string): 'scheduled' | 'live' | 'finished' | "pending" {
     switch (status) {
       case 'scheduled':
-      case 'pending':
         return 'scheduled'
+      case 'pending':
+        return 'pending'
       case 'live':
         return 'live'
       case 'completed':

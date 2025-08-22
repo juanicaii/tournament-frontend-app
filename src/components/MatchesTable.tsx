@@ -188,9 +188,11 @@ export default function MatchesTable({ matches, teams }: MatchesTableProps) {
                   return a.round - b.round
                 }
                 // Then sort by date
-                const aDate = a.kickoffAt ? new Date(a.kickoffAt) : new Date(a.date)
-                const bDate = b.kickoffAt ? new Date(b.kickoffAt) : new Date(b.date)
-                return aDate.getTime() - bDate.getTime()
+                if(!a.date || !b.date) {
+                  return -1
+                 }
+
+                return a.date.getTime() - b.date.getTime()
               })
               .map((match: Match) => {
                 const homeTeam = getTeamById(match.homeTeamId)
@@ -207,9 +209,9 @@ export default function MatchesTable({ matches, teams }: MatchesTableProps) {
                         <div className="flex items-center space-x-2">
                           <Clock className="h-3.5 w-3.5 mr-1.5" />
                           <span>
-                            {match.kickoffAt 
-                              ? new Date(match.kickoffAt).toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' })
-                              : new Date(match.date).toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' })
+                            {match.date
+                              ? new Date(match.date).toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' })
+                              : "No programado"
                             }
                           </span>
                         </div>
