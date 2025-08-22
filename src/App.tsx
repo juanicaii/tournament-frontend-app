@@ -9,7 +9,7 @@ import { Loader2 } from 'lucide-react'
 
 function AppContent() {
   const { loading, error } = useBrandConfig()
-  const { showInstallModal, installPWA, closeInstallModal, forceShowInstallModal, isInstallable } = usePWAInstall()
+  const { showInstallModal, installPWA, closeInstallModal } = usePWAInstall()
   
   // Verificar si estamos en desarrollo
 
