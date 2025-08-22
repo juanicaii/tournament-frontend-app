@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { Home, Search, Heart, Settings, Trophy, Calendar, Target, Users } from 'lucide-react'
+import { Home, Search, Heart, Settings, Trophy, Calendar, BarChart3, Users } from 'lucide-react'
 import { cn } from '../lib/utils'
 
 const globalNavItems = [
@@ -38,8 +38,8 @@ const tournamentNavItems = [
   },
   {
     tab: 'players',
-    icon: Target,
-    label: 'Goleadores'
+    icon: BarChart3,
+    label: 'Estadísticas'
   },
   {
     tab: 'teams',

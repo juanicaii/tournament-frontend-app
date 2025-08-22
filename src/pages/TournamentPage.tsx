@@ -5,7 +5,7 @@ import { Button } from '../components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs'
 import StandingsTable from '../components/StandingsTable'
-import PlayersTable from '../components/PlayersTable'
+import StatisticsTable from '../components/StatisticsTable'
 import TeamsGrid from '../components/TeamsGrid'
 import MatchesTable from '../components/MatchesTable'
 import { formatDate } from '../lib/utils'
@@ -164,7 +164,7 @@ export default function TournamentPage() {
         <TabsList className="hidden md:grid w-full grid-cols-4">
           <TabsTrigger value="standings">Posiciones</TabsTrigger>
           <TabsTrigger value="matches">Partidos</TabsTrigger>
-          <TabsTrigger value="players">Goleadores</TabsTrigger>
+          <TabsTrigger value="players">Estadísticas</TabsTrigger>
           <TabsTrigger value="teams">Equipos</TabsTrigger>
         </TabsList>
 
@@ -177,10 +177,11 @@ export default function TournamentPage() {
         </TabsContent>
 
         <TabsContent value="players" className="mt-6">
-          <PlayersTable 
+          <StatisticsTable 
             playerStats={playerStats} 
             players={players} 
             teams={teams} 
+            standings={standings}
           />
         </TabsContent>
 
