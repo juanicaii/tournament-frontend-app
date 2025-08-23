@@ -1,8 +1,10 @@
-import { Clock, MapPin } from 'lucide-react'
+import { Clock, MapPin, Eye } from 'lucide-react'
 import { Match, Team, Goal, MatchEvent } from '../types/tournament'
 import { Card, CardContent } from './ui/card'
 import { cn, groupBy } from '../lib/utils'
 import TeamAvatar from './TeamAvatar'
+import MatchDetailsModal from './MatchDetailsModal'
+import { useState } from 'react'
 
 interface MatchesTableProps {
   matches: Match[]
@@ -10,7 +12,20 @@ interface MatchesTableProps {
 }
 
 export default function MatchesTable({ matches, teams }: MatchesTableProps) {
+  const [selectedMatch, setSelectedMatch] = useState<Match | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
   const getTeamById = (teamId: string | number) => teams.find(t => t.id === String(teamId))
+
+  const handleMatchClick = (match: Match) => {
+    setSelectedMatch(match)
+    setIsModalOpen(true)
+  }
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
+    setSelectedMatch(null)
+  }
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -46,29 +61,6 @@ export default function MatchesTable({ matches, teams }: MatchesTableProps) {
 
 
 
-  const getTeamGoals = (match: Match, teamId: string | number): Goal[] => {
-    const goals = match.goals || []
-    return goals.filter(goal => String(goal.teamId) === String(teamId))
-  }
-
-  const getTeamEvents = (match: Match, teamId: string | number, eventType: 'goal' | 'yellow_card' | 'red_card' | 'blue_card' | 'substitution'): MatchEvent[] => {
-    const events = match.events || []
-    return events.filter(event => 
-      String(event.teamId) === String(teamId) && event.type === eventType
-    )
-  }
-
-  const getTeamCards = (match: Match, teamId: string | number): { yellow: MatchEvent[], red: MatchEvent[], blue: MatchEvent[] } => {
-    return {
-      yellow: getTeamEvents(match, teamId, 'yellow_card'),
-      red: getTeamEvents(match, teamId, 'red_card'),
-      blue: getTeamEvents(match, teamId, 'blue_card')
-    }
-  }
-
-  const getTeamSubstitutions = (match: Match, teamId: string | number): MatchEvent[] => {
-    return getTeamEvents(match, teamId, 'substitution')
-  }
 
   const getStatusText = (status: string) => {
     switch (status) {
@@ -203,6 +195,7 @@ export default function MatchesTable({ matches, teams }: MatchesTableProps) {
                   <Card 
                     key={match.id}
                     className="relative border hover:shadow-md transition-shadow cursor-pointer rounded-lg overflow-hidden"
+                    onClick={() => handleMatchClick(match)}
                   >
                     <div className={`${getStatusAccentColor(match.status)} h-0.5 w-full`} />
                     <CardContent className="p-4">
@@ -271,123 +264,15 @@ export default function MatchesTable({ matches, teams }: MatchesTableProps) {
                           </div>
                         </div>
 
-                        {/* Events section - only show for finished matches with events */}
-                        {(match.status === 'finished' || match.status === 'completed') && (
-                          (() => {
-                            const homeGoals = getTeamGoals(match, match.homeTeamId)
-                            const awayGoals = getTeamGoals(match, match.awayTeamId)
-                            const homeCards = getTeamCards(match, match.homeTeamId)
-                            const awayCards = getTeamCards(match, match.awayTeamId)
-                            const homeSubstitutions = getTeamSubstitutions(match, match.homeTeamId)
-                            const awaySubstitutions = getTeamSubstitutions(match, match.awayTeamId)
-                            
-                            const hasAnyEvents = homeGoals.length > 0 || awayGoals.length > 0 || 
-                                                homeCards.yellow.length > 0 || homeCards.red.length > 0 || homeCards.blue.length > 0 ||
-                                                awayCards.yellow.length > 0 || awayCards.red.length > 0 || awayCards.blue.length > 0 ||
-                                                homeSubstitutions.length > 0 || awaySubstitutions.length > 0
-                            
-                            if (hasAnyEvents) {
-                              return (
-                                <div className="grid grid-cols-3 gap-2 mt-3 pt-2 border-t border-gray-100">
-                                  {/* Home team events */}
-                                  <div className="text-left space-y-1">
-                                    {/* Home goals */}
-                                    {homeGoals.map((goal) => (
-                                      <div key={goal.id} className="text-xs text-muted-foreground">
-                                        <span className="font-medium">{goal.playerName}</span>
-                                        <span className="ml-1 text-[10px]">({goal.minute}') ⚽</span>
-                                        {goal.type === 'penalty' && <span className="ml-1 text-[10px]">(P)</span>}
-                                        {goal.type === 'own_goal' && <span className="ml-1 text-[10px]">(AG)</span>}
-                                      </div>
-                                    ))}
-                                    {/* Home yellow cards */}
-                                    {homeCards.yellow.map((card) => (
-                                      <div key={card.id} className="text-xs text-yellow-600">
-                                        <span className="font-medium">{card.playerName}</span>
-                                        <span className="ml-1 text-[10px]">({card.minute}') 🟨</span>
-                                      </div>
-                                    ))}
-                                    {/* Home red cards */}
-                                    {homeCards.red.map((card) => (
-                                      <div key={card.id} className="text-xs text-red-600">
-                                        <span className="font-medium">{card.playerName}</span>
-                                        <span className="ml-1 text-[10px]">({card.minute}') 🟥</span>
-                                      </div>
-                                    ))}
-                                    {/* Home blue cards */}
-                                    {homeCards.blue.map((card) => (
-                                      <div key={card.id} className="text-xs text-blue-600">
-                                        <span className="font-medium">{card.playerName}</span>
-                                        <span className="ml-1 text-[10px]">({card.minute}') 🟦</span>
-                                      </div>
-                                    ))}
-                                    {/* Home substitutions */}
-                                    {homeSubstitutions.map((sub) => (
-                                      <div key={sub.id} className="text-xs text-blue-600">
-                                        <div className="font-medium">
-                                          <span className="text-green-600">↗ {sub.playerName}</span>
-                                        </div>
-                                        <div className="text-red-500">
-                                          <span>↙ {sub.relatedPlayerName}</span>
-                                        </div>
-                                        <span className="text-[10px] text-muted-foreground">({sub.minute}') 🔄</span>
-                                      </div>
-                                    ))}
-                                  </div>
-                                  
-                                  {/* Center space */}
-                                  <div></div>
-                                  
-                                  {/* Away team events */}
-                                  <div className="text-right space-y-1">
-                                    {/* Away goals */}
-                                    {awayGoals.map((goal) => (
-                                      <div key={goal.id} className="text-xs text-muted-foreground">
-                                        <span className="text-[10px]">⚽ ({goal.minute}')</span>
-                                        {goal.type === 'penalty' && <span className="ml-1 text-[10px]">(P)</span>}
-                                        {goal.type === 'own_goal' && <span className="ml-1 text-[10px]">(AG)</span>}
-                                        <span className="ml-1 font-medium">{goal.playerName}</span>
-                                      </div>
-                                    ))}
-                                    {/* Away yellow cards */}
-                                    {awayCards.yellow.map((card) => (
-                                      <div key={card.id} className="text-xs text-yellow-600">
-                                        <span className="text-[10px]">🟨 ({card.minute}')</span>
-                                        <span className="ml-1 font-medium">{card.playerName}</span>
-                                      </div>
-                                    ))}
-                                    {/* Away red cards */}
-                                    {awayCards.red.map((card) => (
-                                      <div key={card.id} className="text-xs text-red-600">
-                                        <span className="text-[10px]">🟥 ({card.minute}')</span>
-                                        <span className="ml-1 font-medium">{card.playerName}</span>
-                                      </div>
-                                    ))}
-                                    {/* Away blue cards */}
-                                    {awayCards.blue.map((card) => (
-                                      <div key={card.id} className="text-xs text-blue-600">
-                                        <span className="text-[10px]">🟦 ({card.minute}')</span>
-                                        <span className="ml-1 font-medium">{card.playerName}</span>
-                                      </div>
-                                    ))}
-                                    {/* Away substitutions */}
-                                    {awaySubstitutions.map((sub) => (
-                                      <div key={sub.id} className="text-xs text-blue-600">
-                                        <div className="font-medium text-right">
-                                          <span className="text-green-600">{sub.playerName} ↗</span>
-                                        </div>
-                                        <div className="text-red-500 text-right">
-                                          <span>{sub.relatedPlayerName} ↙</span>
-                                        </div>
-                                        <span className="text-[10px] text-muted-foreground">🔄 ({sub.minute}')</span>
-                                      </div>
-                                    ))}
-                                  </div>
-                                </div>
-                              )
-                            }
-                            return null
-                          })()
+                        {/* Click indicator for matches with events */}
+                        {((match.status === 'finished' || match.status === 'completed') && 
+                          ((match.goals && match.goals.length > 0) || (match.events && match.events.length > 0))) && (
+                          <div className="mt-3 pt-2 border-t border-gray-100">
+                            <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground hover:text-foreground transition-colors">
+                              <Eye className="h-3.5 w-3.5" />
+                              <span>Click para ver detalles</span>
+                            </div>
+                          </div>
                         )}
                       </div>
 
@@ -414,6 +299,13 @@ export default function MatchesTable({ matches, teams }: MatchesTableProps) {
           </CardContent>
         </Card>
       )}
+
+      <MatchDetailsModal 
+        match={selectedMatch}
+        teams={teams}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+      />
     </div>
   )
 }

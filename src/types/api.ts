@@ -126,9 +126,14 @@ export interface ApiMatchEvent {
   recordedBy: string
   createdAt: string
   updatedAt: string
-  player: ApiPlayer
+  player?: ApiPlayer
   relatedPlayer?: ApiPlayer | null
-  recordedByInfo: ApiRecordedByInfo
+  recordedByInfo?: ApiRecordedByInfo
+  // Flat player fields from actual API response
+  playerFirstName?: string
+  playerLastName?: string
+  playerTshirtNumber?: number
+  playerDni?: string | null
 }
 
 export interface ApiMatchResult {

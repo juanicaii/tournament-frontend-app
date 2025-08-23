@@ -129,9 +129,12 @@ class TournamentService {
     return events
       .filter(event => ['goal', 'yellow_card', 'red_card', 'blue_card', 'substitution'].includes(event.eventType))
       .map(event => {
-        const playerName = event.player.firstName && event.player.lastName 
-          ? `${event.player.firstName} ${event.player.lastName}`
-          : event.player.displayName
+        // Try flat player fields first, then nested player object
+        const playerName = event.playerFirstName && event.playerLastName
+          ? `${event.playerFirstName} ${event.playerLastName}`
+          : event.player?.firstName && event.player?.lastName
+            ? `${event.player.firstName} ${event.player.lastName}`
+            : event.player?.displayName || 'Unknown Player'
         
         const relatedPlayerName = event.relatedPlayer?.firstName && event.relatedPlayer?.lastName
           ? `${event.relatedPlayer.firstName} ${event.relatedPlayer.lastName}`
@@ -157,9 +160,12 @@ class TournamentService {
     return events
       .filter(event => event.eventType === 'goal')
       .map(event => {
-        const playerName = event.player.firstName && event.player.lastName 
-          ? `${event.player.firstName} ${event.player.lastName}`
-          : event.player.displayName
+        // Try flat player fields first, then nested player object
+        const playerName = event.playerFirstName && event.playerLastName
+          ? `${event.playerFirstName} ${event.playerLastName}`
+          : event.player?.firstName && event.player?.lastName
+            ? `${event.player.firstName} ${event.player.lastName}`
+            : event.player?.displayName || 'Unknown Player'
         
         const assistPlayerName = event.relatedPlayer?.firstName && event.relatedPlayer?.lastName
           ? `${event.relatedPlayer.firstName} ${event.relatedPlayer.lastName}`
@@ -187,13 +193,34 @@ class TournamentService {
       tournamentId: apiMatch.tournamentId.toString(),
       homeTeamId: apiMatch.homeTeamId.toString(),
       awayTeamId: apiMatch.awayTeamId.toString(),
+      homeTeamName: apiMatch.homeTeamName,
+      awayTeamName: apiMatch.awayTeamName,
       homeScore: apiMatch.result?.homeScore,
       awayScore: apiMatch.result?.awayScore,
       date: apiMatch.scheduledAt ? new Date(apiMatch.scheduledAt) : undefined,
       matchday: apiMatch.round,
+      round: apiMatch.round,
       status: this.mapMatchStatus(apiMatch.status),
       venue: apiMatch.venue?.name,
+      venueId: apiMatch.venueId,
       phase: apiMatch.phase,
+      result: apiMatch.result ? {
+        id: apiMatch.result.id,
+        matchId: apiMatch.result.matchId,
+        homeScore: apiMatch.result.homeScore,
+        awayScore: apiMatch.result.awayScore,
+        homeScoreHalftime: apiMatch.result.homeScoreHalftime || 0,
+        awayScoreHalftime: apiMatch.result.awayScoreHalftime || 0,
+        homeScoreExtraTime: apiMatch.result.homeScoreExtraTime,
+        awayScoreExtraTime: apiMatch.result.awayScoreExtraTime,
+        homeScorePenalties: apiMatch.result.homeScorePenalties,
+        awayScorePenalties: apiMatch.result.awayScorePenalties,
+        winnerTeamId: apiMatch.result.winnerTeamId,
+        isOfficial: apiMatch.result.isOfficial,
+        recordedBy: apiMatch.result.recordedBy || '',
+        recordedAt: apiMatch.result.recordedAt,
+        updatedAt: apiMatch.result.updatedAt
+      } : undefined,
       goals: goals.length > 0 ? goals : undefined,
       events: events.length > 0 ? events : undefined
     }
