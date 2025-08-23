@@ -1,5 +1,5 @@
 import { Clock, MapPin, Eye } from 'lucide-react'
-import { Match, Team, Goal, MatchEvent } from '../types/tournament'
+import { Match, Team } from '../types/tournament'
 import { Card, CardContent } from './ui/card'
 import { cn, groupBy } from '../lib/utils'
 import TeamAvatar from './TeamAvatar'
